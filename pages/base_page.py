@@ -13,12 +13,18 @@ class BasePage:
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
 
     def get_element_text(self, by_locator):
-        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
-        return element.text
+        try:
+            element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
+            return element.text
+        except:
+            return "element not found!"
 
-    def is_enabled(self, by_locator):
-        element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
-        return bool(element)
+    def is_element_visible(self, by_locator):
+        try:
+            element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
+            return bool(element)
+        except:
+            return False
 
     def get_title(self, title):
         WebDriverWait(self.driver, 10).until(EC.title_is(title))
