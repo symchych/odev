@@ -38,11 +38,5 @@ class BasePage:
         WebDriverWait(self.driver, 10).until(EC.title_is(title))
         return self.driver.title
 
-    def scroll_to_element(self, element):
-        constitution = False
-        while constitution is False:
-            self.actions.move_to_element(element).perform()
-            label.sendKeys(Keys.PAGE_DOWN);
-
     def sleep(self, param):
         sleep(param)

@@ -8,12 +8,11 @@ class YoutubeMainPage(BasePage):
 
     '''BUTTONS'''
     SignInBtn = (By.CSS_SELECTOR, '[aria-label ="Sign in"]')
-    loginBox = (By.XPATH, '//*[@id ="identifierId"]')
-    emailNextButton = (By.XPATH, '//*[@id ="identifierNext"]')
+    loginBox = (By.ID, "identifierId")
+    emailNextButton = (By.ID, "identifierNext")
     passWordBox = (By.XPATH, '//*[@id ="password"]/div[1]/div / div[1]/input')
-    passwordNextButton = (By.XPATH, '//*[@id ="passwordNext"]')
+    passwordNextButton = (By.ID, "passwordNext")
     usualUsersIcon = (By.XPATH, '//*[@alt="Avatar image" and @height="32"]')
-    usersChannelBtn = (By.XPATH, '//*[@id="label" and ')
     youChannelBtn = (By.XPATH, '//*[@id="label" and text()="Your channel"]')
 
 

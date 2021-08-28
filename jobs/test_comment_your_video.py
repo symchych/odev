@@ -4,7 +4,7 @@ from pages.youtube_channel_page import YoutubeChannelPage
 from pages.youtube_video_page import YoutubeVideoPage
 from jobs.test_base import BaseTest
 
-class Test_Login(BaseTest):
+class Test_Comment(BaseTest):
 
 
 
@@ -31,29 +31,21 @@ class Test_Login(BaseTest):
     #1. Go to the uploaded videos (youtube studio)
     def test_go_to_your_channel(self):
         self.youtube_main_page = YoutubeMainPage(self.driver)
-        self.youtube_channel_page = YoutubeChannelPage(self.driver)
         self.youtube_main_page.open_base_url()
         self.youtube_main_page.open_channel()
 
-
     #2. Open an uploaded video
     def test_open_the_video(self):
-        #self.youtube_main_page = YoutubeMainPage(self.driver)   #TEST
         self.youtube_channel_page = YoutubeChannelPage(self.driver)
-
         self.youtube_channel_page.open_video()
-        #self.youtube_main_page.driver.maximize_window() #TEST
-        #self.youtube_channel_page.open_video(TestData.youtube_link)
-        #self.youtube_channel_page.sleep(300)
 
     #3. Comment opened video
     def test_comment(self):
-        self.youtube_channel_page = YoutubeChannelPage(self.driver)
         self.youtube_video_page = YoutubeVideoPage(self.driver)
         self.youtube_video_page.scrolldown()
         self.youtube_video_page.do_comment(TestData.comment_text)
         self.youtube_video_page.check_that_comment_is_present()
-        #self.youtube_channel_page.sleep(300)
+
 
 
 
