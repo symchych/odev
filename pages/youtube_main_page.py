@@ -10,20 +10,20 @@ class YoutubeMainPage(BasePage):
     SignInBtn = (By.CSS_SELECTOR, '[aria-label ="Sign in"]')
     loginBox = (By.XPATH, '//*[@id ="identifierId"]')
     emailNextButton = (By.XPATH, '//*[@id ="identifierNext"]')
-    passWordBox = (By.XPATH,
-        '//*[@id ="password"]/div[1]/div / div[1]/input')
+    passWordBox = (By.XPATH, '//*[@id ="password"]/div[1]/div / div[1]/input')
     passwordNextButton = (By.XPATH, '//*[@id ="passwordNext"]')
     usualUsersIcon = (By.XPATH, '//*[@alt="Avatar image" and @height="32"]')
     usersChannelBtn = (By.XPATH, '//*[@id="label" and ')
+    youChannelBtn = (By.XPATH, '//*[@id="label" and text()="Your channel"]')
+
 
     '''METHODS'''
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver.get(TestData.base_url)
 
-    '''def open_base_url(self):
-        self.driver.get(TestData.base_url)'''
+    def open_base_url(self):
+        self.driver.get(TestData.base_url)
 
     def get_login_page_title(self, title):
         return self.get_title(title)
@@ -32,7 +32,11 @@ class YoutubeMainPage(BasePage):
         return self.is_element_visible(self.SignInBtn)
 
     def do_click_signin(self):
-        self.do_click(self.SignInBtn)
+        try:
+            self.do_click(self.SignInBtn)
+        except:
+            print("Cookies agreement window has shown. Trying with another sign in button...")
+            self.do_click(self.SignInBtn)
 
     def do_login_email(self, username):
         self.do_send_keys(self.loginBox, username)
@@ -45,10 +49,16 @@ class YoutubeMainPage(BasePage):
     def verify_login_success(self):
         assert self.is_element_visible(self.usualUsersIcon), "user's icon not visible"
 
-    '''def open_channel(self):
+    def open_channel(self):
         self.do_click(self.usualUsersIcon)
-        self.do_click()
-'''
+        self.do_click(self.youChannelBtn)
+
+    def is_element_present(self, locator):
+        try:
+            self.driver.find_element(locator)
+        except:
+            return False
+
 
 
 

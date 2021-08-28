@@ -1,23 +1,31 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
+        self.actions = ActionChains(driver)
 
     def do_click(self, by_locator):
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).click()
+        try:
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).click()
+        except:
+            return print("element not found!")
 
     def do_send_keys(self, by_locator, text):
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
+        try:
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).send_keys(text)
+        except:
+            return print("element not found!")
 
     def get_element_text(self, by_locator):
         try:
             element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
             return element.text
         except:
-            return "element not found!"
+            return print("element not found!")
 
     def is_element_visible(self, by_locator):
         try:
@@ -29,3 +37,12 @@ class BasePage:
     def get_title(self, title):
         WebDriverWait(self.driver, 10).until(EC.title_is(title))
         return self.driver.title
+
+    def scroll_to_element(self, element):
+        constitution = False
+        while constitution is False:
+            self.actions.move_to_element(element).perform()
+            label.sendKeys(Keys.PAGE_DOWN);
+
+    def sleep(self, param):
+        sleep(param)
