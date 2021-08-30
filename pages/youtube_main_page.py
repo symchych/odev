@@ -14,7 +14,8 @@ class YoutubeMainPage(BasePage):
     passwordNextButton = (By.ID, "passwordNext")
     usualUsersIcon = (By.XPATH, '//*[@alt="Avatar image" and @height="32"]')
     youChannelBtn = (By.XPATH, '//*[@id="label" and text()="Your channel"]')
-
+    searchfield = (By.ID, 'search')
+    seachbtn = (By.ID, 'search-icon-legacy')
 
     '''METHODS'''
 
@@ -52,11 +53,11 @@ class YoutubeMainPage(BasePage):
         self.do_click(self.usualUsersIcon)
         self.do_click(self.youChannelBtn)
 
-    def is_element_present(self, locator):
-        try:
-            self.driver.find_element(locator)
-        except:
-            return False
+    def enter_text_and_hit_search(self):
+        self.do_send_keys(self.searchfield, TestData.search_for_a_video_data)
+        self.do_click(self.seachbtn)
+
+
 
 
 

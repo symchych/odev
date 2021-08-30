@@ -6,8 +6,6 @@ from jobs.test_base import BaseTest
 
 class Test_Comment(BaseTest):
 
-
-
     '''
     Test case:
     0. Log in
@@ -15,8 +13,8 @@ class Test_Comment(BaseTest):
     2. Open an uploaded video
     3. Comment it
     pytest jobs/test_comment_your_video.py
-    $x('//*[@id="contenteditable-root" and @aria-label="Add a public comment..."]'
     '''
+
 
     #0. Log in
     def test_login(self):
@@ -42,6 +40,7 @@ class Test_Comment(BaseTest):
     #3. Comment opened video
     def test_comment(self):
         self.youtube_video_page = YoutubeVideoPage(self.driver)
+        self.youtube_video_page.check_media_player_visible()
         self.youtube_video_page.scrolldown()
         self.youtube_video_page.do_comment(TestData.comment_text)
         self.youtube_video_page.check_that_comment_is_present()
