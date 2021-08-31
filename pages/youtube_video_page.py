@@ -20,6 +20,7 @@ class YoutubeVideoPage(BasePage):
     internalTitle = (By.XPATH, "/html[1]/body[1]/ytd-app[1]/div[1]/ytd-page-manager[1]/ytd-watch-flexy[1]/div[5]/div[1]/div[1]/div[8]/div[2]/ytd-video-primary-info-renderer[1]/div[1]/h1[1]/yt-formatted-string[1]")
     likebutton = (By.XPATH, "//body[1]/ytd-app[1]/div[1]/ytd-page-manager[1]/ytd-watch-flexy[1]/div[5]/div[1]/div[1]/div[6]/div[2]/ytd-video-primary-info-renderer[1]/div[1]/div[1]/div[3]/div[1]/ytd-menu-renderer[1]/div[1]/ytd-toggle-button-renderer[1]/a[1]/yt-icon-button[1]/button[1]")
     # because css is impossible yt-formatted-string[class='style-scope ytd-video-primary-info-renderer']
+    ogorchenie = (By.XPATH, "//ytd-compact-video-renderer[%s]/div/ytd-thumbnail")
 
 
     '''METHODS'''
@@ -60,6 +61,13 @@ class YoutubeVideoPage(BasePage):
         #self.is_element_visible(self.internalTitle)
         #internaltitletext = self.get_element_text(self.internalTitle)
         #assert externaltitle == internaltitletext, "names doesn't match!"
+
+    def original_click_recommendation(self, number):
+        #self.sleep(2)
+        self.do_click((By.XPATH, ("//ytd-compact-video-renderer[%s]/div/ytd-thumbnail") % (number)))
+        #self.sleep(15)
+        assert self.is_element_visible(self.mediaPlayer)
+        self.sleep(5)
 
     def hit_like(self):
         self.is_element_visible(self.likebutton)

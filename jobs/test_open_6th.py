@@ -36,4 +36,4 @@ class Test_Open_Sixth(BaseTest):
     #2. Open a video from recommendation (Select 6th item)
     def test_open_6th_recommended_video(self):
         self.youtube_video_page = YoutubeVideoPage(self.driver)
-        self.youtube_video_page.click_needed_recommendation(2)
+        self.youtube_video_page.original_click_recommendation(6)
